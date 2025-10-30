@@ -1,4 +1,6 @@
 #!/bin/bash
+# don't run without reading the whole code. if you dont know bash then GETOUT !!
+
 
 menu(){
     while true;do
