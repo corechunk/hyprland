@@ -12,6 +12,8 @@ menu(){
         1)
             rm -rf $HOME/.config/hypr/*
             cp -r ./hypr/* $HOME/.config/hypr
+            hyprctl reload
+            sleep 5
             ;;
         x|X)
             break
