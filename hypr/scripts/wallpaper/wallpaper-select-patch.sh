@@ -68,8 +68,14 @@ done
 # -----------------------------
 # SET WALLPAPER VIA HYPRPAPER
 # -----------------------------
-killall hyprpaper 2>/dev/null
-hyprpaper &
+
+#killall hyprpaper 2>/dev/null
+#hyprpaper &
+
+if ! pgrep -x hyprpaper > /dev/null; then
+    hyprpaper &
+fi
+
 sleep 0.2 # wait for hyprpaper to start
 
 hyprctl hyprpaper preload "$fullpath"
