@@ -39,9 +39,9 @@ GDK_BACKEND=$BACKEND yad \
 "SUPER + ALT + E" "Open terminal file manager" "(ranger)" \
 "" "" "" \
 "___ Other ___" "" "" \
-"SUPER + W" "Select wallpaper" "(swww)" \
+"SUPER + W" "Select wallpaper" "(hyprpaper[rofi])" \
 "SUPER + N" "Toggle notifications" "(swaync)" \
-"SUPER + ALT + V" "Clipboard history" "(cliphist)" \
+"SUPER + ALT + V" "Clipboard history" "(cliphist[rofi])" \
 "" "" "" \
 "___ Window Management ___" "" "" \
 "SUPER + Arrows" "Move focus" "" \
