@@ -2,6 +2,18 @@
 # Patched Rofi Wallpaper Chooser with Preview (Wayland)
 # Works with lbonn's Rofi patch (Wayland + element icons)
 
+
+
+# Check if rofi or yad is running and kill them if they are
+if pidof rofi >/dev/null; then
+  pkill rofi && exit 0  # if rofi is open then kill that and exit rofi for toggle effect
+fi
+
+if pidof yad >/dev/null; then
+  pkill yad #&& exit 0  # if yad is open then kill that and instantly open rofi(wallpaper selector)
+fi
+
+
 # -----------------------------
 # CONFIG
 # -----------------------------

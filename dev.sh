@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # don't run without reading the whole code. if you dont know bash then GETOUT !!
 
 

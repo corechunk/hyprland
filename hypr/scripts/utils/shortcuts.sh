@@ -5,18 +5,20 @@
 BACKEND=wayland
 
 # Check if rofi or yad is running and kill them if they are
-if pidof rofi > /dev/null; then
-  pkill rofi
+if pidof rofi >/dev/null; then
+  pkill rofi #&& exit 0
 fi
 
-if pidof yad > /dev/null; then
-  pkill yad
+if pidof yad >/dev/null; then
+  pkill yad && exit 0
 fi
 
 # Launch yad with calculated width and height
 GDK_BACKEND=$BACKEND yad \
     --center \
-    --title="KooL Quick Cheat Sheet" \
+    --title="corechunk/hyprland keybindings Hint" \
+    --width=1000 \
+    --height=850 \
     --no-buttons \
     --list \
     --column=Key: \
