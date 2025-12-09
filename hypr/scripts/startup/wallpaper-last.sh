@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 wp="$(cat "$HOME/.config/hypr/scripts/wallpaper/lastsave.txt")"
 
 # Wait until hyprpaper is running

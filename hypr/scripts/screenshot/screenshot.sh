@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ## Basic
     # Fullscreen screenshot, copy to clipboard
     #grim - | wl-copy

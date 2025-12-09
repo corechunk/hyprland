@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Patched Rofi Wallpaper Chooser with Preview (Wayland)
 # Works with lbonn's Rofi patch (Wayland + element icons)
 
