@@ -10,10 +10,8 @@ menu(){
         read -p "Options : " cho
         case $cho in
         1)
-            rm -rf $HOME/.config/hypr/*
-            cp -r ./hypr/* $HOME/.config/hypr
+            rsync -av ./hypr/ $HOME/.config/hypr/
             hyprctl reload
-            sleep 5
             ;;
         x|X)
             break

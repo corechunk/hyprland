@@ -80,21 +80,7 @@ done
 # -----------------------------
 # SET WALLPAPER VIA HYPRPAPER
 # -----------------------------
+ln -sf "$fullpath" /home/netchunk/Pictures/wallpapers/selected-image
 
-#killall hyprpaper 2>/dev/null
-#hyprpaper &
-
-if ! pgrep -x hyprpaper > /dev/null; then
-    hyprpaper &
-fi
-
-sleep 0.2 # wait for hyprpaper to start
-
-hyprctl hyprpaper preload "$fullpath"
-hyprctl hyprpaper wallpaper ",$fullpath"
-
-# -----------------------------
-# SAVE LAST CHOSEN WALLPAPER
-# -----------------------------
-mkdir -p "$(dirname "$LASTSAVE")"
-echo "$fullpath" > "$LASTSAVE"
+pkill hyprpaper
+nohup hyprpaper &
