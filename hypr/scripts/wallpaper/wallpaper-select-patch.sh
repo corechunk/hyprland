@@ -80,7 +80,18 @@ done
 # -----------------------------
 # SET WALLPAPER VIA HYPRPAPER
 # -----------------------------
-ln -sf "$fullpath" /home/netchunk/Pictures/wallpapers/selected-image
+ln -sf "$fullpath" /home/netchunk/Pictures/wallpapers/selected-image && \
+    notify-send -a "Wallpaper" "Symlink Updated" "Selected: $(basename "$fullpath")" || \
+	notify-send -a "Wallpaper" -u critical "Symlink Error" "Failed to update symlink"
+
+wallust run -s "$fullpath" || true
+
+ # 3. Send the notification manually since we used || true
+ if [ -f "$HOME/.config/quickshell/core/theme/Colors.qml" ]; then
+	notify-send -a "Wallust" -i "preferences-desktop-theme" "Theme Updated" "Colors synced with $(basename "$fullpath")"
+else
+	notify-send -a "Wallust" -u critical "Theme Error" "Failed to generate colortemplate"
+fi
 
 pkill hyprpaper
 nohup hyprpaper &
