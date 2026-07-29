@@ -11,6 +11,10 @@ menu(){
         case $cho in
         1)
             rsync -av ./hypr/ $HOME/.config/hypr/
+            rsync -av ./pypr/ $HOME/.config/pypr/
+            chmod +x $HOME/.config/pypr/*.sh 2>/dev/null
+            chmod +x $HOME/.config/hypr/scripts/*/*.sh 2>/dev/null
+            chmod +x $HOME/.config/hypr/scripts/*/*/*.sh 2>/dev/null
             hyprctl reload
             ;;
         x|X)

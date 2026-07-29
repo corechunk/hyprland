@@ -1,0 +1,114 @@
+[pyprland]
+plugins = [
+    "scratchpads"
+]
+
+[scratchpads.term_0]
+animation = "fromTop"
+command = "kitty --class pypr-term-0"
+class = "pypr-term-0"
+match_by = "class"
+lazy = true
+size = "75% 60%"
+unfocus = "hide"
+hides = ["term_1", "term_2", "term_3", "term_4", "term_5", "term_6", "term_7", "term_8", "term_9"]
+margin = 20
+
+[scratchpads.term_1]
+animation = "fromTop"
+command = "kitty --class pypr-term-1"
+class = "pypr-term-1"
+match_by = "class"
+lazy = true
+size = "75% 60%"
+unfocus = "hide"
+hides = ["term_0", "term_2", "term_3", "term_4", "term_5", "term_6", "term_7", "term_8", "term_9"]
+margin = 20
+
+[scratchpads.term_2]
+animation = "fromBottom"
+command = "kitty --class pypr-term-2"
+class = "pypr-term-2"
+match_by = "class"
+lazy = true
+size = "75% 60%"
+unfocus = "hide"
+hides = ["term_0", "term_1", "term_3", "term_4", "term_5", "term_6", "term_7", "term_8", "term_9"]
+margin = 20
+
+[scratchpads.term_3]
+animation = "fromLeft"
+command = "kitty --class pypr-term-3"
+class = "pypr-term-3"
+match_by = "class"
+lazy = true
+size = "50% 75%"
+unfocus = "hide"
+hides = ["term_0", "term_1", "term_2", "term_4", "term_5", "term_6", "term_7", "term_8", "term_9"]
+margin = 20
+
+[scratchpads.term_4]
+animation = "fromRight"
+command = "kitty --class pypr-term-4"
+class = "pypr-term-4"
+match_by = "class"
+lazy = true
+size = "50% 75%"
+unfocus = "hide"
+hides = ["term_0", "term_1", "term_2", "term_3", "term_5", "term_6", "term_7", "term_8", "term_9"]
+margin = 20
+
+[scratchpads.term_5]
+animation = "fromTop"
+command = "kitty --class pypr-term-5"
+class = "pypr-term-5"
+match_by = "class"
+lazy = true
+size = "80% 70%"
+unfocus = "hide"
+hides = ["term_0", "term_1", "term_2", "term_3", "term_4", "term_6", "term_7", "term_8", "term_9"]
+margin = 20
+
+[scratchpads.term_6]
+animation = "fromBottom"
+command = "kitty --class pypr-term-6"
+class = "pypr-term-6"
+match_by = "class"
+lazy = true
+size = "80% 70%"
+unfocus = "hide"
+hides = ["term_0", "term_1", "term_2", "term_3", "term_4", "term_5", "term_7", "term_8", "term_9"]
+margin = 20
+
+[scratchpads.term_7]
+animation = "fromLeft"
+command = "kitty --class pypr-term-7"
+class = "pypr-term-7"
+match_by = "class"
+lazy = true
+size = "60% 80%"
+unfocus = "hide"
+hides = ["term_0", "term_1", "term_2", "term_3", "term_4", "term_5", "term_6", "term_8", "term_9"]
+margin = 20
+
+[scratchpads.term_8]
+animation = "fromRight"
+command = "kitty --class pypr-term-8"
+class = "pypr-term-8"
+match_by = "class"
+lazy = true
+size = "60% 80%"
+unfocus = "hide"
+hides = ["term_0", "term_1", "term_2", "term_3", "term_4", "term_5", "term_6", "term_7", "term_9"]
+margin = 20
+
+[scratchpads.term_9]
+animation = "fromTop"
+command = "kitty --class pypr-term-9"
+class = "pypr-term-9"
+match_by = "class"
+lazy = true
+size = "90% 80%"
+unfocus = "hide"
+hides = ["term_0", "term_1", "term_2", "term_3", "term_4", "term_5", "term_6", "term_7", "term_8"]
+margin = 20
