@@ -21,6 +21,12 @@ fi
 if [ -f "$HOME/.config/hypr/disable_pypr" ]; then
     exit 0
 fi
+if [ "$TARGET" = "kill_all" ]; then
+    for addr in $(hyprctl clients -j | jq -r '.[] | select(.class | startswith("pypr-term-")) | .address'); do
+        hyprctl dispatch closewindow "address:$addr"
+    done
+    exit 0
+fi
 
 # Locate pypr binary dynamically
 PYPR_BIN=$(command -v pypr 2>/dev/null)
