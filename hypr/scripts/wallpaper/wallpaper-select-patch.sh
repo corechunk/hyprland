@@ -80,7 +80,7 @@ done
 # -----------------------------
 # SET WALLPAPER VIA HYPRPAPER
 # -----------------------------
-ln -sf "$fullpath" /home/netchunk/Pictures/wallpapers/selected-image && \
+ln -sf "$fullpath" $HOME/Pictures/wallpapers/selected-image && \
     notify-send -a "Wallpaper" "Symlink Updated" "Selected: $(basename "$fullpath")" || \
 	notify-send -a "Wallpaper" -u critical "Symlink Error" "Failed to update symlink"
 
