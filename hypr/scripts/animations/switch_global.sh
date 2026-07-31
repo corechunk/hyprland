@@ -14,7 +14,7 @@ fi
 
 echo "==============================="
 echo " Available GLOBAL Themes"
-echo " (Applies to Window+Workspace+Layer)"
+echo " (Applies to Window+Workspace+Layer+Border)"
 echo "==============================="
 for i in "${!options[@]}"; do
     echo "$((i+1)). ${options[$i]}"
@@ -27,7 +27,7 @@ if [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -le "${#opt
     selected_file="${options[$((choice-1))]}"
     
     # Update live and project configs for all three categories
-    for category in windows workspaces layers; do
+    for category in windows workspaces layers borders; do
         symlink_name="current_${category}.conf"
         
         if [ -f "$LIVE_BASE/$category/$selected_file" ]; then
