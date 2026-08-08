@@ -1,0 +1,4 @@
+windowrulev2 = float, class:^(quickshell-gecko-.*)$
+windowrulev2 = noborder, class:^(quickshell-gecko-.*)$
+windowrulev2 = norounding, class:^(quickshell-gecko-.*)$
+windowrulev2 = workspace special:qs_hidden, class:^(quickshell-gecko-.*)$, initial:true
