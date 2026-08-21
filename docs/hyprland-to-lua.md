@@ -215,14 +215,19 @@ hl.bind("SUPER + SHIFT + left", hl.dsp.window.resize({ x = -20, y = 0, relative 
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
 ```
 
-### Fallback/Raw Dispatching
-For dispatchers that don't map cleanly to structured table representations under the `hl.dsp` namespace, pass the name and arguments directly to `hl.dispatch()` within a Lua function wrapper. 
+### Fallback/Raw Dispatching & Dispatcher Objects
+In the Hyprland Lua API, `hl.dispatch()` and `hl.bind()` expect **dispatcher objects** created via the `hl.dsp` namespace (e.g. `hl.dsp.window.move({ workspace = ws })` or `hl.dsp.window.swap({ direction = "left" })`).
 
-*Note: Be careful when passing raw commands; deprecated legacy dispatchers (e.g., `workspaceopt`) will cause a hard internal Lua crash if triggered.*
-```lua
-hl.bind("SUPER + ALT + SPACE", function()
-    hl.dispatch("some_valid_dispatcher", "argument")
-end)
+**Do NOT pass string command names directly to `hl.dispatch("movetoworkspace", "1")`** — doing so will trigger a runtime error: `hl.dispatch: expected a dispatcher (e.g. hl.dsp.window.close())`.
+
+For commands without direct structured `hl.dsp` helpers, wrap the string command in `hl.dsp.exec_cmd("hyprctl dispatch ...")`:
+-- Structured dispatcher objects (Recommended)
+hl.bind("SUPER + SHIFT + 1", hl.dsp.window.move({ workspace = "1" }))
+hl.bind("SUPER + CTRL + 1", hl.dsp.window.move({ workspace = "1", follow = false }))
+hl.bind("SUPER + ALT + left", hl.dsp.window.swap({ direction = "left" }))
+
+-- Raw hyprctl fallback for custom commands
+hl.bind("SUPER + ALT + K", hl.dsp.exec_cmd("bash script.sh kill_all"))
 ```
 
 ---

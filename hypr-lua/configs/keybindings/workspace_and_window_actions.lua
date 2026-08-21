@@ -4,10 +4,10 @@
 local mainMod = "SUPER"
 
 -- Windows: Move focus
-hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "l" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "r" }))
-hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "u" }))
-hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "d" }))
+hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- Windows: Resize current active window (repeating keybinds)
 hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.resize({ x = -20, y = 0, relative = true }), { repeating = true })
@@ -16,22 +16,19 @@ hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.resize({ x = 0, y = -20, relat
 hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.resize({ x = 0, y = 20, relative = true }), { repeating = true })
 
 -- Windows: Move position
-hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.move({ direction = "l" }))
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.move({ direction = "r" }))
-hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.move({ direction = "u" }))
-hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.move({ direction = "d" }))
+hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.move({ direction = "left" }))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.move({ direction = "down" }))
 
 -- Windows: Swap position with another window
-hl.bind(mainMod .. " + ALT + left", function() hl.dispatch("swapwindow", "l") end)
-hl.bind(mainMod .. " + ALT + right", function() hl.dispatch("swapwindow", "r") end)
-hl.bind(mainMod .. " + ALT + up", function() hl.dispatch("swapwindow", "u") end)
-hl.bind(mainMod .. " + ALT + down", function() hl.dispatch("swapwindow", "d") end)
+hl.bind(mainMod .. " + ALT + left", hl.dsp.window.swap({ direction = "left" }))
+hl.bind(mainMod .. " + ALT + right", hl.dsp.window.swap({ direction = "right" }))
+hl.bind(mainMod .. " + ALT + up", hl.dsp.window.swap({ direction = "up" }))
+hl.bind(mainMod .. " + ALT + down", hl.dsp.window.swap({ direction = "down" }))
 
 -- Windows: Cycle windows and bring to top on Alt+Tab
-hl.bind("ALT + TAB", function()
-    hl.dispatch("cyclenext")
-    hl.dispatch("bringactivetotop")
-end)
+hl.bind("ALT + TAB", hl.dsp.exec_cmd("hyprctl dispatch cyclenext && hyprctl dispatch bringactivetotop"))
 
 -- Switch workspaces with mainMod + [0-9]
 for i = 1, 9 do
@@ -39,31 +36,31 @@ for i = 1, 9 do
 end
 hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 10 }))
 
--- Move active window and follow to workspace mainMod + SHIFT [0-9]
--- (Using key codes to avoid layout issues)
-local workspaceCodes = {
-    [10] = "1", [11] = "2", [12] = "3", [13] = "4", [14] = "5",
-    [15] = "6", [16] = "7", [17] = "8", [18] = "9", [19] = "10"
-}
-for code, ws in pairs(workspaceCodes) do
-    hl.bind(mainMod .. " + SHIFT + code:" .. code, function() hl.dispatch("movetoworkspace", ws) end)
-    hl.bind(mainMod .. " + CTRL + code:" .. code, function() hl.dispatch("movetoworkspacesilent", ws) end)
+-- Move active window to workspace (mainMod + SHIFT + [0-9])
+-- Move active window SILENTLY to workspace (mainMod + CTRL + [0-9] and mainMod + ALT + [0-9])
+for i = 1, 9 do
+    hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
+    hl.bind(mainMod .. " + CTRL + " .. i, hl.dsp.window.move({ workspace = i, follow = false }))
+    --hl.bind(mainMod .. " + ALT + " .. i, hl.dsp.window.move({ workspace = i, follow = false }))
 end
+hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
+hl.bind(mainMod .. " + CTRL + 0", hl.dsp.window.move({ workspace = 10, follow = false }))
+hl.bind(mainMod .. " + ALT + 0", hl.dsp.window.move({ workspace = 10, follow = false }))
 
-hl.bind(mainMod .. " + SHIFT + bracketleft", function() hl.dispatch("movetoworkspace", "-1") end)
-hl.bind(mainMod .. " + SHIFT + bracketright", function() hl.dispatch("movetoworkspace", "+1") end)
-hl.bind(mainMod .. " + CTRL + bracketleft", function() hl.dispatch("movetoworkspacesilent", "-1") end)
-hl.bind(mainMod .. " + CTRL + bracketright", function() hl.dispatch("movetoworkspacesilent", "+1") end)
+hl.bind(mainMod .. " + SHIFT + bracketleft", hl.dsp.window.move({ workspace = "-1" }))
+hl.bind(mainMod .. " + SHIFT + bracketright", hl.dsp.window.move({ workspace = "+1" }))
+hl.bind(mainMod .. " + CTRL + bracketleft", hl.dsp.window.move({ workspace = "-1", follow = false }))
+hl.bind(mainMod .. " + CTRL + bracketright", hl.dsp.window.move({ workspace = "+1", follow = false }))
 
 -- Special workspace (scratchpad)
 hl.bind(mainMod .. " + U", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + U", function() hl.dispatch("movetoworkspace", "special:magic") end)
+hl.bind(mainMod .. " + SHIFT + U", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces
-hl.bind(mainMod .. " + mouse_down", function() hl.dispatch("workspace", "e+1") end)
-hl.bind(mainMod .. " + mouse_up", function() hl.dispatch("workspace", "e-1") end)
-hl.bind(mainMod .. " + TAB", function() hl.dispatch("workspace", "e+1") end)
-hl.bind(mainMod .. " + SHIFT + TAB", function() hl.dispatch("workspace", "e-1") end)
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + TAB", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + SHIFT + TAB", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Mouse bindings (move/resize/float by dragging)
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
