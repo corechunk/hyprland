@@ -1,26 +1,21 @@
--- AUTOSTART
--- Autostart necessary processes (like notification daemons, status bars, etc.)
+-- Hyprland Startup Configuration (hyprland.lua)
 
-hl.config({
-    ["exec-once"] = {
-        terminal,
-        "waybar",
-        "hyprpaper -c " .. os.getenv("HOME") .. "/.config/hypr-lua/hyprpaper.conf",
-        "nm-applet",
-        "bash " .. scripts_DIR .. "/utils/dock.sh",
-        "pypr",
-        
-        -- Clipboard manager startup
-        "wl-paste --type text --watch cliphist store",
-        "wl-paste --type image --watch cliphist store",
-        
-        -- Notification daemon startup
-        "killall -q dunst mako fnott swaynotificationd notify-osd swaync; sleep 0.2; swaync",
-        
-        -- Set up screenshot directory
-        scripts_DIR .. "/startup/screenshot-dir.sh"
-    }
-})
+hl.on("hyprland.start", function()
+    -- Kill lingering pypr instances and launch the daemon with a safe delay
+    hl.exec_cmd("killall -q pypr; sleep 0.5; bash -c 'sleep 1 && pypr'")
 
--- Execute on every configuration reload
--- hl.config({ exec = { scripts_DIR .. "/startup/wallpaper-last.sh" } })
+    -- Core UI components & status bars
+    hl.exec_cmd("waybar")
+    hl.exec_cmd("hyprpaper")
+
+    -- System tray & notification daemons
+    hl.exec_cmd("nm-applet --indicator")
+
+    -- Clipboard management (cliphist & wl-paste)
+    hl.exec_cmd("wl-paste --type text --watch cliphist store")
+    hl.exec_cmd("wl-paste --type image --watch cliphist store")
+
+    -- Custom user scripts and utilities
+    hl.exec_cmd("~/.config/hypr/scripts/dock.sh")
+    hl.exec_cmd("~/.config/hypr/scripts/screenshots.sh")
+end)
